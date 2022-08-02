@@ -1,0 +1,7 @@
+{
+  "dbHost": "localhost",
+  "dbPort": 3306,
+  "dbUser": "hamnetPortal",
+  "dbPass": "Test123",
+  "dbName": "hamnetPortal"
+}
