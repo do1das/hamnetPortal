@@ -13,7 +13,7 @@
 ## Quellcode kompilieren
 Projekt in IntelliJ IDEA öffnen und das Artefakt "hamnetPortal:jar" erstellen (dies wird beim normalen Build auch mit erstellt).
 
-Die kompilierte JAR Datei befindet sich dann in `out/artifacts/hamnetPortal_jar/hamnetPortal.jar`
+Die kompilierte JAR Datei befindet sich dann in `out/artifacts/hamnetPortal_jar/hamnetPortal.jar`. Die Datei hat (bis auf Java 8) keine weiteren Abhängigkeiten und kann verschoben oder auf anderen Systemen verwendet werden.
 
 ## Programm ausführen
 Die JAR Datei in der Konsole öffnen mit
