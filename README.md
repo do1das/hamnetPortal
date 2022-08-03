@@ -2,13 +2,16 @@
 #### Ein Portal in Form einer Webseite für das Hamnet ausschließlich in Java programmiert
 
 ## Funktionen
-- Registrierung von Funkamateuren für den Zugang zum Portal
-- Freischaltung neuer Registrierungen
-- Web-Proxy ins Hamnet
-- Verschiedene Anleitungen für den Zugang zum Hamnet
+- [x] Alles in einer (jar) Datei
+- [x] Java HTTP Server
+- [ ] Registrierung von Funkamateuren für den Zugang zum Portal
+- [ ] Freischaltung neuer Registrierungen
+- [ ] Web-Proxy ins Hamnet
+- [ ] Verschiedene Anleitungen für den Zugang zum Hamnet
 
 ## Voraussetzungen
 - Java 8
+- MySQL Datenbank
 
 ## Quellcode kompilieren
 Projekt in IntelliJ IDEA öffnen und das Artefakt "hamnetPortal:jar" erstellen (dies wird beim normalen Build auch mit erstellt).
