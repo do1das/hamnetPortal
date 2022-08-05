@@ -1,16 +1,19 @@
 package radio.do1das.hamnetPortal.httpserver;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
-public class PortalHTTPHandler implements HttpHandler {
+public class PortalHTTPHandler extends AbstractHandler {
     private final static Logger LOGGER = LoggerFactory.getLogger(PortalHTTPHandler.class);
 
     private static final Map<String,String> MIME_MAP = new HashMap<>();
@@ -33,7 +36,7 @@ public class PortalHTTPHandler implements HttpHandler {
         MIME_MAP.put("md", "text/plain");
         MIME_MAP.put("txt", "text/plain");
         //MIME_MAP.put("php", "text/plain");
-    };
+    }
 
     private String filesystemRoot;
     private String urlPrefix;
@@ -46,6 +49,7 @@ public class PortalHTTPHandler implements HttpHandler {
         if (!urlPrefix.endsWith("/")) {
             throw new RuntimeException("pathPrefix does not end with a slash");
         }
+        //this.setContextPath(urlPrefix);
         this.urlPrefix = urlPrefix;
 
         assert filesystemRoot.endsWith("/");
@@ -55,82 +59,93 @@ public class PortalHTTPHandler implements HttpHandler {
     }
 
     @Override
-    public void handle(HttpExchange he) throws IOException {
-        String method = he.getRequestMethod();
-        if (! ("HEAD".equals(method) || "GET".equals(method) || "POST".equals(method))) {
-            sendError(he, 501, "Unsupported HTTP method");
+    public void handle(String s, Request request, HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException, ServletException {
+        String method = request.getMethod();
+        String wholeUrlPath = request.getPathInfo();
+        if (! ("HEAD".equals(method) || "GET".equals(method) || ("POST".equals(method) && wholeUrlPath.endsWith("/postData")))) {
+            sendError(response, 501, "Unsupported HTTP method");
+            request.setHandled(true);
+            LOGGER.warn("(501) Versuchter Zugriff durch nicht unterstützte Methode " + method + " von " + request.getRemoteHost());
             return;
-        }
-
-        String wholeUrlPath = he.getRequestURI().getPath();
-        if (wholeUrlPath.endsWith("/")) {
-            wholeUrlPath += directoryIndex;
         }
         if (! wholeUrlPath.startsWith(urlPrefix)) {
             throw new RuntimeException("Path is not in prefix - incorrect routing?");
         }
 
-        if (wholeUrlPath.endsWith("/postData")) {
-            InputStream ios = he.getRequestBody();
-            ByteArrayOutputStream result = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            for (int length; (length = ios.read(buffer)) != -1; ) {
-                result.write(buffer, 0, length);
-            }
-            String parameters = result.toString("UTF-8");
-            String[] input = parameters.split("&");
-            //ToDo: input Array an Verarbeitungsmethode schicken
+        if (wholeUrlPath.endsWith("/footer.html") || wholeUrlPath.endsWith("/header.html")) {
+            sendError(response, 401, "Forbidden");
+            request.setHandled(true);
+            LOGGER.warn("(401) Versuchter Zugriff auf verbotene Datei " + request.getPathInfo() + " von " + request.getRemoteHost());
+            return;
+        }
 
-            String response = " <html>\n"
-                    + "<body>\n"
-                    + "\n"
-                    + "<form action=\"http://localhost:8000/postData\" method=\"post\">\n"
-                    + "input: <input type=\"text\" name=\"input\"><br>\n"
-                    + "input2: <input type=\"text\" name=\"input2\"><br>\n"
-                    + "<input type=\"submit\">\n"
-                    + "</form>\n"
-                    + "\n"
-                    + "</body>\n"
-                    + "</html> ";
-            OutputStream os = he.getResponseBody();
-            he.sendResponseHeaders(200, response.length());
-            os.write(response.getBytes());
-            os.close();
+        if (wholeUrlPath.endsWith("/postData")) {
+
+            request.setHandled(true);
             return;
         }
 
         if (wholeUrlPath.equals("/proxy")) {
             //ToDo: Weiterleitung an Proxy
+
+            request.setHandled(true);
             return;
         }
-
-        String urlPath = wholeUrlPath.substring(urlPrefix.length());
         String filePath = filesystemRoot + wholeUrlPath;
 
         if (! filePath.startsWith(filesystemRoot)) {
-            reportPathTraversal(he);
+            reportPathTraversal(response);
+            request.setHandled(true);
+            LOGGER.warn("Versuchter PathTraversal " + filePath + " von " + request.getRemoteHost());
             return;
         }
 
+        if (wholeUrlPath.endsWith("/")) {
+            filePath += directoryIndex;
+            wholeUrlPath += directoryIndex;
+        }
         InputStream fis;
         fis = getClass().getResourceAsStream(filePath);
+
         if(fis == null) {
-            sendError(he, 404, "File not found");
+            sendError(response, 404, "File not found");
+            request.setHandled(true);
+            LOGGER.warn("(404) Versuchter Zugriff auf nicht vorhandene Datei " + filePath + " von " + request.getRemoteHost());
             return;
         }
-
+        String urlPath = wholeUrlPath.substring(urlPrefix.length());
         String mimeType = lookupMime(urlPath);
-        he.getResponseHeaders().set("Content-Type", mimeType);
+        response.setHeader("Content-Type", mimeType);
+
+        if(mimeType.equals("text/html")){
+            fis = mergeStream(fis);
+        }
+
         if ("GET".equals(method)) {
-            he.sendResponseHeaders(200, fis.available());
-            OutputStream os = he.getResponseBody();
+            LOGGER.info("(200) Zugriff auf " + request.getPathInfo() + " von " + request.getRemoteHost());
+            response.setStatus(200);
+            OutputStream os = response.getOutputStream();
             copyStream(fis, os);
             os.close();
         } else {
             assert("HEAD".equals(method));
-            he.sendResponseHeaders(200, -1);
+            response.setStatus(200);
         }
         fis.close();
+        request.setHandled(true);
+
+    }
+
+    private InputStream mergeStream(InputStream body){
+        if (body == null) return null;
+        InputStream header, footer;
+        header = getClass().getResourceAsStream(filesystemRoot + "/header.html");
+        footer = getClass().getResourceAsStream(filesystemRoot + "/footer.html");
+        Vector<InputStream> streams = new Vector<>();
+        streams.add(header);
+        streams.add(body);
+        streams.add(footer);
+        return new SequenceInputStream(streams.elements());
     }
 
     private void copyStream(InputStream is, OutputStream os) throws IOException {
@@ -141,19 +156,12 @@ public class PortalHTTPHandler implements HttpHandler {
         }
     }
 
-    private void sendError(HttpExchange he, int rCode, String description) throws IOException {
-        String message = "HTTP error " + rCode + ": " + description;
-        byte[] messageBytes = message.getBytes("UTF-8");
-
-        he.getResponseHeaders().set("Content-Type", "text/plain; charset=utf-8");
-        he.sendResponseHeaders(rCode, messageBytes.length);
-        OutputStream os = he.getResponseBody();
-        os.write(messageBytes);
-        os.close();
+    private void sendError(HttpServletResponse response, int rCode, String description) throws IOException {
+        response.sendError(rCode, description);
     }
 
-    private void reportPathTraversal(HttpExchange he) throws IOException {
-        sendError(he, 400, "Path traversal attempt detected");
+    private void reportPathTraversal(HttpServletResponse response) throws IOException {
+        sendError(response, 400, "Path traversal attempt detected");
     }
 
     private static String getExt(String path) {

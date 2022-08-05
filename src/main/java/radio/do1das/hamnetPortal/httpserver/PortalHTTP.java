@@ -1,23 +1,22 @@
 package radio.do1das.hamnetPortal.httpserver;
 
 
-import com.sun.net.httpserver.HttpServer;
 import org.apache.commons.cli.*;
+import org.eclipse.jetty.server.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import radio.do1das.hamnetPortal.database.Database;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.sql.SQLException;
+import java.util.Properties;
 
 public class PortalHTTP {
     private final static Logger LOGGER = LoggerFactory.getLogger(PortalHTTP.class);
-    public static void create(HttpServer hs, String path, String filesystemRoot, String directoryIndex) {
+
+    public static void create(Server server, String path, String filesystemRoot, String directoryIndex) {
         PortalHTTPHandler phh = new PortalHTTPHandler(path, filesystemRoot, directoryIndex);
-        hs.createContext(path, phh);
+        server.setHandler(phh);
     }
     public static void main(String[] args) {
+
         LOGGER.info("HTTP Server startet...");
 
         CommandLine commandLine;
@@ -45,16 +44,14 @@ public class PortalHTTP {
             LOGGER.error("Fehler beim Parsen der Parameter", e);
         }
 
-        HttpServer httpServer;
+        Server httpServer = new Server(port);
+        create(httpServer, "/", "/html", "index.html");
         try {
-            httpServer = HttpServer.create(new InetSocketAddress(port), 0);
-        } catch (IOException e) {
+            httpServer.start();
+        } catch (Exception e) {
             LOGGER.error("Problem beim Starten des HTTP Servers", e);
             throw new RuntimeException(e);
         }
-        create(httpServer, "/", "/html", "index.html");
-        httpServer.setExecutor(null);
-        httpServer.start();
         LOGGER.info("HTTP Server erfolgreich gestartet und lauscht auf Port " +port);
     }
 
