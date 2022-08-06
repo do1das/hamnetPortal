@@ -9,15 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e858971f-effd-402e-897c-6792685954a7" name="Changes" comment="Migration zu Jetty">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
+    <list default="true" id="e858971f-effd-402e-897c-6792685954a7" name="Changes" comment="Java Versionsfehler behoben&#10;Servlet Struktur">
+      <change afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/site/PostData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/site/Site.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/hamnetPortal_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/hamnetPortal_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/PortalHTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/PortalHTTP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/PortalHTTPHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/PortalHTTPHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/html/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/html/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/util/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/util/Json.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,18 +44,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Nextcloud/Amateurfunk/AFU_TF/hamnet/hamnetPortal/src/main/resources/html&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/Nextcloud/Amateurfunk/AFU_TF/hamnet/hamnetPortal/src/main/resources/html",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2710893",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Nextcloud\Amateurfunk\AFU_TF\hamnet\hamnetPortal\src\main\resources\html" />
@@ -135,8 +137,18 @@
       <option name="project" value="LOCAL" />
       <updated>1659486872773</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Migration zu Jetty">
+      <created>1659728995946</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659728995946</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:com.google.protobuf:protobuf-java" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -156,7 +168,8 @@
     <MESSAGE value="LICENSE" />
     <MESSAGE value="Readme" />
     <MESSAGE value="Migration zu Jetty" />
-    <option name="LAST_COMMIT_MESSAGE" value="Migration zu Jetty" />
+    <MESSAGE value="Java Versionsfehler behoben&#10;Servlet Struktur" />
+    <option name="LAST_COMMIT_MESSAGE" value="Java Versionsfehler behoben&#10;Servlet Struktur" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

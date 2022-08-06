@@ -1,13 +1,13 @@
 package radio.do1das.hamnetPortal.httpserver;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,9 +38,9 @@ public class PortalHTTPHandler extends AbstractHandler {
         //MIME_MAP.put("php", "text/plain");
     }
 
-    private String filesystemRoot;
-    private String urlPrefix;
-    private String directoryIndex;
+    private final String filesystemRoot;
+    private final String urlPrefix;
+    private final String directoryIndex;
 
     public PortalHTTPHandler(String urlPrefix, String filesystemRoot, String directoryIndex) {
         if (!urlPrefix.startsWith("/")) {
@@ -49,7 +49,6 @@ public class PortalHTTPHandler extends AbstractHandler {
         if (!urlPrefix.endsWith("/")) {
             throw new RuntimeException("pathPrefix does not end with a slash");
         }
-        //this.setContextPath(urlPrefix);
         this.urlPrefix = urlPrefix;
 
         assert filesystemRoot.endsWith("/");
@@ -68,6 +67,7 @@ public class PortalHTTPHandler extends AbstractHandler {
             LOGGER.warn("(501) Versuchter Zugriff durch nicht unterstützte Methode " + method + " von " + request.getRemoteHost());
             return;
         }
+
         if (! wholeUrlPath.startsWith(urlPrefix)) {
             throw new RuntimeException("Path is not in prefix - incorrect routing?");
         }
@@ -79,18 +79,6 @@ public class PortalHTTPHandler extends AbstractHandler {
             return;
         }
 
-        if (wholeUrlPath.endsWith("/postData")) {
-
-            request.setHandled(true);
-            return;
-        }
-
-        if (wholeUrlPath.equals("/proxy")) {
-            //ToDo: Weiterleitung an Proxy
-
-            request.setHandled(true);
-            return;
-        }
         String filePath = filesystemRoot + wholeUrlPath;
 
         if (! filePath.startsWith(filesystemRoot)) {
@@ -108,11 +96,9 @@ public class PortalHTTPHandler extends AbstractHandler {
         fis = getClass().getResourceAsStream(filePath);
 
         if(fis == null) {
-            sendError(response, 404, "File not found");
-            request.setHandled(true);
-            LOGGER.warn("(404) Versuchter Zugriff auf nicht vorhandene Datei " + filePath + " von " + request.getRemoteHost());
             return;
         }
+
         String urlPath = wholeUrlPath.substring(urlPrefix.length());
         String mimeType = lookupMime(urlPath);
         response.setHeader("Content-Type", mimeType);
