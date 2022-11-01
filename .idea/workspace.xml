@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="hamnetPortal:jar" />
@@ -9,16 +12,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e858971f-effd-402e-897c-6792685954a7" name="Changes" comment="Java Versionsfehler behoben&#10;Servlet Struktur">
-      <change afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/site/PostData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/site/Site.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/hamnetPortal_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/hamnetPortal_jar.xml" afterDir="false" />
+    <list default="true" id="e858971f-effd-402e-897c-6792685954a7" name="Changes" comment="Design hinzugefügt&#10;ProxyServlet angefangen">
+      <change afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/site/WebProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/img/hp-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/img/pixabay/key-2028593.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/scripts/custom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/scripts/custom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/scripts/popper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/scripts/popper.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/test.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/test.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/html/webproxy.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/PortalHTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/PortalHTTP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/PortalHTTPHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/httpserver/PortalHTTPHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/util/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/radio/do1das/hamnetPortal/util/Json.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/html/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/html/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/html/scripts/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/scripts/bootstrap.min.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +43,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -39,28 +55,35 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2Cldqw0KAImBUH9l9k68x44GEMg" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/Nextcloud/Amateurfunk/AFU_TF/hamnet/hamnetPortal/src/main/resources/html",
-    "project.structure.last.edited": "Artifacts",
+    "last_opened_file_path": "C:/Users/SpecT/Nextcloud/Amateurfunk/AFU_TF/hamnet/hamnetPortal",
+    "project.structure.last.edited": "Global Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2710893",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie"
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Nextcloud\Amateurfunk\AFU_TF\hamnet\hamnetPortal\src\main\resources\html" />
       <recent name="D:\Nextcloud\Amateurfunk\AFU_TF\hamnet\hamnetPortal\src\main\java\radio\do1das\hamnetPortal" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Nextcloud\Amateurfunk\AFU_TF\hamnet\hamnetPortal\src\main\resources\html" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="radio.do1das.hamnetPortal.util" />
@@ -144,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659728995946</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Java Versionsfehler behoben&#10;Servlet Struktur">
+      <created>1659744812574</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1659744812574</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -162,6 +192,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="HTTPServer Basis implementiert" />
     <MESSAGE value="Downgrade zu Java 1.8&#10;Argumente für Port&#10;JAR Konfig" />
     <MESSAGE value="Ressourcen Pfade angepasst für JAR-Kompatibilität" />
@@ -169,7 +200,8 @@
     <MESSAGE value="Readme" />
     <MESSAGE value="Migration zu Jetty" />
     <MESSAGE value="Java Versionsfehler behoben&#10;Servlet Struktur" />
-    <option name="LAST_COMMIT_MESSAGE" value="Java Versionsfehler behoben&#10;Servlet Struktur" />
+    <MESSAGE value="Design hinzugefügt&#10;ProxyServlet angefangen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Design hinzugefügt&#10;ProxyServlet angefangen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -178,7 +210,20 @@
           <properties class="radio.do1das.hamnetPortal.config.ConfigurationException" package="radio.do1das.hamnetPortal.config" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/hamnetPortal$PortalHTTP.ic" NAME="PortalHTTP Coverage Results" MODIFIED="1667273612878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>radio.do1das.hamnetPortal.httpserver.*</FILTER>
+    </SUITE>
   </component>
 </project>

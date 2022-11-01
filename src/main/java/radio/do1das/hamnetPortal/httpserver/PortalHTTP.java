@@ -24,9 +24,9 @@ public class PortalHTTP {
         ServletContextHandler servletHandlers = new ServletContextHandler();
         servletHandlers.setSessionHandler(sh);
         servletHandlers.addServlet("radio.do1das.hamnetPortal.httpserver.site.PostData", "/postData");
-
+        servletHandlers.addServlet("radio.do1das.hamnetPortal.httpserver.site.WebProxy", "/proxy/*");
+        
         PortalHTTPHandler phh = new PortalHTTPHandler(path, filesystemRoot, directoryIndex);
-
         handlers.addHandler(phh);
         handlers.addHandler(servletHandlers);
         server.setHandler(handlers);

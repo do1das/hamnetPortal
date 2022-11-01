@@ -23,11 +23,14 @@ public class PortalHTTPHandler extends AbstractHandler {
         MIME_MAP.put("gif", "image/gif");
         MIME_MAP.put("html", "text/html");
         MIME_MAP.put("js", "application/javascript");
+        MIME_MAP.put("map", "application/json");
+        MIME_MAP.put("woff2", "font/woff2");
         MIME_MAP.put("json", "application/json");
         MIME_MAP.put("jpg", "image/jpeg");
         MIME_MAP.put("jpeg", "image/jpeg");
         MIME_MAP.put("mp4", "video/mp4");
         MIME_MAP.put("pdf", "application/pdf");
+        MIME_MAP.put("ico", "image/x-icon");
         MIME_MAP.put("png", "image/png");
         MIME_MAP.put("svg", "image/svg+xml");
         MIME_MAP.put("xlsm", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
@@ -35,7 +38,7 @@ public class PortalHTTPHandler extends AbstractHandler {
         MIME_MAP.put("zip", "application/zip");
         MIME_MAP.put("md", "text/plain");
         MIME_MAP.put("txt", "text/plain");
-        //MIME_MAP.put("php", "text/plain");
+        //MIME_MAP.put("jsp", "text/html");
     }
 
     private final String filesystemRoot;
@@ -61,7 +64,7 @@ public class PortalHTTPHandler extends AbstractHandler {
     public void handle(String s, Request request, HttpServletRequest httpServletRequest, HttpServletResponse response) throws IOException, ServletException {
         String method = request.getMethod();
         String wholeUrlPath = request.getPathInfo();
-        if (! ("HEAD".equals(method) || "GET".equals(method) || ("POST".equals(method) && wholeUrlPath.endsWith("/postData")))) {
+        if (! ("HEAD".equals(method) || "GET".equals(method) || ("POST".equals(method) && (wholeUrlPath.endsWith("/postData") || wholeUrlPath.endsWith("/proxy"))))) {
             sendError(response, 501, "Unsupported HTTP method");
             request.setHandled(true);
             LOGGER.warn("(501) Versuchter Zugriff durch nicht unterstützte Methode " + method + " von " + request.getRemoteHost());
@@ -98,9 +101,14 @@ public class PortalHTTPHandler extends AbstractHandler {
         if(fis == null) {
             return;
         }
-
         String urlPath = wholeUrlPath.substring(urlPrefix.length());
         String mimeType = lookupMime(urlPath);
+        if(mimeType.equals("application/octet-stream")) {
+            sendError(response, 401, "Forbidden");
+            request.setHandled(true);
+            LOGGER.warn("(401) Versuchter Zugriff auf verbotene Datei " + request.getPathInfo() + " von " + request.getRemoteHost());
+            return;
+        }
         response.setHeader("Content-Type", mimeType);
 
         if(mimeType.equals("text/html")){

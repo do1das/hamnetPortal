@@ -1,0 +1,60 @@
+<section class="vh-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-6 col-xl-5">
+
+                <p class="text-center h2 mb-4">Registrieren</p>
+
+                <form>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <input type="text" id="rName" class="form-control" required/>
+                            <label class="form-label" for="rName">Dein Name</label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <input type="text" id="rCallSign" class="form-control" required/>
+                            <label class="form-label" for="rCallSign">Dein Rufzeichen</label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <input type="email" id="rMail" class="form-control" required/>
+                            <label class="form-label" for="rMail">Deine Email</label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <input type="password" id="rPass" class="form-control" required/>
+                            <label class="form-label" for="rPass">Passwort</label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <input type="password" id="rPass2" class="form-control" required/>
+                            <label class="form-label" for="rPass2">Passwort wiederholen</label>
+                        </div>
+                    </div>
+
+                    <div class="form-check d-flex justify-content-center mb-5">
+                        <input class="form-check-input me-2" type="checkbox" value=""
+                               id="rTOS" required/>
+                        <label class="form-check-label" for="rTOS">
+                            Ich stimme den <a href="#!">Nutzungsbedingungen</a> zu
+                        </label>
+                    </div>
+
+                    <div class="d-flex justify-content-center mb-5">
+                        <button type="submit" class="btn btn-primary btn-lg" onclick="validatePassword()">Registrieren</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

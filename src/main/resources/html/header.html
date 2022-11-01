@@ -2,6 +2,83 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="/scripts/bootstrap.min.css">
+    <link rel="stylesheet" href="/img/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/scripts/custom.css">
     <title>HamnetPortal</title>
 </head>
-Header
+
+<body class="d-flex flex-column min-vh-100">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
+    <!-- Container wrapper -->
+    <div class="container">
+        <!-- Navbar brand -->
+        <a class="navbar-brand me-2" href="/">
+            <img
+                    src="/img/hp-512.png"
+                    height="32"
+                    alt="HP Logo"
+                    loading="lazy"
+                    style="margin-top: -1px;"
+            />
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Neuigkeiten</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Zugang ins Hamnet</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><p class="text-center">Router</p></li>
+                        <li><a class="dropdown-item" href="#">Ubiquiti</a></li>
+                        <li><a class="dropdown-item" href="#">Mikrotik</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><p class="text-center">VPN</p></li>
+                        <li><a class="dropdown-item" href="#">RWTH Aachen (pptp)</a></li>
+                        <li><a class="dropdown-item" href="#">HamServerPi (wireguard)</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/webproxy.html">Wep Proxy</a>
+                </li>
+            </ul>
+            <!-- Left links -->
+        </div>
+
+        <div class="d-flex align-items-center">
+
+            <button class="nav-item dropdown btn btn-primary me-3">
+                <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">Login</a>
+                <div class="dropdown-menu shadow p-2 mb-5 bg-dark rounded" aria-labelledby="loginDropdown" style="min-width: 200px;">
+                    <form action="/" method="post">
+                        <input type="email" class="form-control" placeholder="Email" required="required">
+                        <input type="password" class="form-control" placeholder="Passwort" required="required">
+                        <input type="submit" class="btn btn-primary btn-block" value="Login">
+                    </form>
+                    <div class="dropdown-divider"></div>
+                    <a href="#">Passwort vergessen?</a>
+                </div>
+            </button>
+
+            <a href="/register.html" class="text-warning">
+                Registrieren
+            </a>
+        </div>
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
